@@ -15,7 +15,7 @@ exec { 'install_flask':
 
 # Don't manage Flask package directly
 package { 'Flask':
-  ensure => present,
+  ensure   => present,
   provider => 'pip',
-  require => Exec['install_flask'],
+  require  => Exec['install_flask'],
 }
