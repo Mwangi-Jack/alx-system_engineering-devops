@@ -12,3 +12,10 @@ exec { 'install_flask':
   unless  => '/usr/bin/pip3 show Flask',
   require => Package['python3-pip'],
 }
+
+# Don't manage Flask package directly
+package { 'Flask':
+  ensure => present,
+  provider => 'pip',
+  require => Exec['install_flask'],
+}
