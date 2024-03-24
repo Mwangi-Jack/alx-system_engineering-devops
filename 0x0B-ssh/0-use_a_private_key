@@ -2,4 +2,4 @@
 # Script to connect to the remote server
 # with username 'ubuntu' and ip address '54.152.58.246'
 
-ssh ubuntu@54.152.58.246
+ssh -i ~/.ssh/school ubuntu@54.152.58.246
