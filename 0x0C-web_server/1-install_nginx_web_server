@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#script to configure a new Ubuntu machine with nginx web server
+
+sudo apt-get update
+sudo apt-get install nginx
+sudo apt ufw allow 'Nginx HTTP'
