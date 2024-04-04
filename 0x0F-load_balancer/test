@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Assign the hostname to a variable
+hostname="518799-web-01"
+
+# Extract the desired part of the hostname
+extracted_part="${hostname#*-}"
+
+# Print the extracted part
+echo "Extracted part of the hostname: $extracted_part"
