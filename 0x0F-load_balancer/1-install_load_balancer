@@ -6,23 +6,37 @@ brown='\e[0;33m'
 green='\e[1;32m'
 reset='\033[0m'
 
-configuration='backend web_servers \
-					mode http \
-					balance roundrobin \
-					server 518799-web-1 54.160.73.127:80 check \
-					server 518799-web-2 100.25.199.206:80 check \'
+configuration="\
+			frontend http_front
+				bind *:80
+				stats uri /haproxy?stats
+				default_backend web-servers
 
+			backend web-servers
+				balance roundrobin
+				server 307260-web-01 52.86.241.106
+				server 307260-web-02 100.25.103.2
+			"
+
+#updating and installing Haproxy
 echo -e "${blue}Updating and installing ${brown}HAProxy${blue}.${reset}\n"
-
 sudo apt-get update -y -qq && \
 	sudo apt-get install --no-install-recommends software-properties-common && \
-		add-apt-repository ppa:vbernat/haproxy-2.8 && \
+		sudo add-apt-repository ppa:vbernat/haproxy-2.8 && \
 			sudo apt-get install haproxy=2.8.\*
 
-echo -e "${blue}Configuring  the HAProxy ${brown}Backend ${blue}and {$brown}Frontend. ${reset}\n"
 
-sudo sed -i '19i\ $configuration' /etc/haproxy/haproxy.cfg
+# Give the user ownership to website files for easy editing
+sudo chown -R "$USER":"$USER" /etc/haproxy
+sudo chmod -R 755 /etc/haproxy
 
+#configuring the Haproxy load balancer by editing the haproxy.cfg file
+echo -e "${blue}Configuring  the HAProxy ${brown}Backend ${blue}and ${brown}Frontend. ${reset}\n"
+sudo echo ${configuration} >> /etc/haproxy/haproxy.cfg
+
+
+#Restarting the service
 echo -e "Restarting ${blue}HAProxy ${reset}Service.${reset}\n"
+sudo systemctl restart haproxy
 
-sudo systemctyl restart haproxy
+echo -e "\n${green}Completed.${reset} ✅\n"
