@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+#Script to install HAProxy on ubuntu load balancer
+
+blue='\e[1;34m'
+brown='\e[0;33m'
+green='\e[1;32m'
+reset='\033[0m'
+
+configuration='backend web_servers \
+					mode http \
+					balance roundrobin \
+					server 518799-web-1 54.160.73.127:80 check \
+					server 518799-web-2 100.25.199.206:80 check \'
+
+echo -e "${blue}Updating and installing ${brown}HAProxy${blue}.${reset}\n"
+
+sudo apt-get update -y -qq && \
+	sudo apt-get install --no-install-recommends software-properties-common && \
+		add-apt-repository ppa:vbernat/haproxy-2.8 && \
+			sudo apt-get install haproxy=2.8.\*
+
+echo -e "${blue}Configuring  the HAProxy ${brown}Backend ${blue}and {$brown}Frontend. ${reset}\n"
+
+sudo sed -i '19i\ $configuration' /etc/haproxy/haproxy.cfg
+
+echo -e "Restarting ${blue}HAProxy ${reset}Service.${reset}\n"
+
+sudo systemctyl restart haproxy
