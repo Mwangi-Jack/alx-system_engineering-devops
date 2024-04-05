@@ -29,7 +29,7 @@ cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.b
 echo -e "Hello World!" | dd status=none of=/var/www/html/index.nginx-debian.html
 
 #Adding a custom header
-sudo sed -i "27i\ listen 80 default_server;/add_header X-Served-By $hostname;" /etc/nginx/sites-available/default
+sudo sed -i "listen 80 default_server;/add_header X-Served-By $hostname;" /etc/nginx/sites-available/default
 
 # Restarting nginx
 sudo service nginx restart
