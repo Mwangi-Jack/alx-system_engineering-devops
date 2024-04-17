@@ -3,9 +3,4 @@
 # username' and runs the command 'whoami'
 # under the specified 'username'
 
-if [ $# -ne 1 ]; then
-	echo "Usage: $0 <username>"
-	exit 1
-fi
-
 sudo -u $1 whoami
