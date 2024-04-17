@@ -3,4 +3,4 @@
 # username' and runs the command 'whoami'
 # under the specified 'username'
 
-sudo -u $1 whoami
+sudo -u "$1" whoami
