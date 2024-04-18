@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+echo -e "updating packages\n"
+
+sudo apt update
+
+echo -e "Downloading the MySQL Repository\n"
+
+wget https://dev.mysql.com/get/mysql-apt-config_0.8.12-1_all.deb
+
+
+echo -e "Installing the downloded MySQL Package \n Make Sure to Select 'Ubunt Bionic and MySQL 5.7\n"
+
+sudo dpkg -i mysql-apt-config_0.8.12-1_all.deb
+
+echo -e "updating the APT Repository\n"
+
+sudo apt update
+
+echo -e "checking weather  the MySQL repository has been successfully installed\n"
+
+sudo apt-cache policy mysql-server
+
+echo -e "Installing MySQL from the repository\n"
+
+sudo apt install -f mysql-client=5.7* mysql-community-server=5.7* mysql-server=5.7*
+
