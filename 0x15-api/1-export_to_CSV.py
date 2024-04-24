@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import csv
 import requests
 import sys
 
@@ -11,7 +12,11 @@ if __name__ == '__main__':
     todos = requests.get(f"{base_url}/todos?userid={userId}",
                          timeout=10).json()
 
-    with open(f"{userId}.csv", "w", encoding="utf-8") as file:
+    with open(f"{userId}.csv", "w", newline="") as file:
+        csv_writer = csv.writer(file)
+        csv_writer.writerow(todos[0].keys())
+
         for todo in todos:
-            file.write("\"{}\", \"{}\", \"{}\", \"{}\"\n".
-                       format(userId, user, todo['completed'], todo['title']))
+            csv_writer.writerow(todo.values)
+            # file.write("\"{}\", \"{}\", \"{}\", \"{}\"\n".
+                    #    format(userId, user, todo['completed'], todo['title']))
