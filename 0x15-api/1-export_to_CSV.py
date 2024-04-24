@@ -16,10 +16,7 @@ if __name__ == '__main__':
                          timeout=10).json()
 
     with open(f"{userId}.csv", "w", newline="", encoding="utf-8") as file:
-        csv_writer = csv.writer(file)
-        # csv_writer.writerow(todos[0].keys())
+        csv_writer = csv.writer(file, quoting=csv.QUOTE_ALL)
 
         for todo in todos:
-            # csv_writer.writerow(todo.values())
-            file.write("\"{}\", \"{}\", \"{}\", \"{}\"\n".
-                       format(userId, user, todo['completed'], todo['title']))
+            csv_writer.writerow([userId, user, todo.get("completed"), todo.get("title")])
