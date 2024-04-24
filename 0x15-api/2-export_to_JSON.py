@@ -19,7 +19,16 @@ if __name__ == "__main__":
     for todo in todos:
         todo['username'] = username
 
-    data = {user.get('id'): todos}
+    data = {
+        userId: [
+            {
+                "task": todo.get("title"),
+                "completed": todo.get("completed"),
+                "username": username
+            }
+            for todo in todos
+        ]
+    }
 
     with open(f"{userId}.json", "w", encoding="utf-8") as file:
         file.write(json.dumps(data, indent=4))
