@@ -12,10 +12,10 @@ if __name__ == "__main__":
     base_url = "https://jsonplaceholder.typicode.com"
     user = requests.get(f"{base_url}/users/{userId}",
                         timeout=10).json()
-    todos = requests.get(f"{base_url}/todos?userid={userId}",
+    todos = requests.get(f"{base_url}/todos?userId={userId}",
                          timeout=10).json()
     username = user.get("username")
-    print(len(todos))
+
     with open(f"{userId}.csv", "w", encoding="utf-8") as file:
         csv_writer = csv.writer(file, quoting=csv.QUOTE_ALL)
 
