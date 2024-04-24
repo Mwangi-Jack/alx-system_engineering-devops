@@ -39,9 +39,10 @@ def getTodo():
 	return (total_todos, incomplete, completed_todos)
 
 
-user = getuser()
-total_todos, incomplete, completed_todos = getTodo()
+if __name__ == '__main__':
+	user = getuser()
+	total_todos, incomplete, completed_todos = getTodo()
 
-print(f"Employee {user} is done with tasks({incomplete}/{total_todos}):")
-for todo in completed_todos:
-    print(f"\t{todo['title']}",)
+	print(f"Employee {user} is done with tasks({incomplete}/{total_todos}):")
+	for todo in completed_todos:
+		print(f"\t{todo['title']}",)
