@@ -14,7 +14,7 @@ def top_ten(subreddit):
     headers = {"User-Agent": "MyApp/1.0"}
 
     response = requests.get(url, timeout=2,
-                            params={"limit": 10}, headers=headers)
+                            params={"limit": 10}, headers=headers, allow_redirects=False)
     print(response.status_code)
     if response.status_code == 200:
         data = response.json()['data']
