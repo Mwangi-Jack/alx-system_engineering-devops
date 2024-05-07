@@ -20,10 +20,8 @@ def top_ten(subreddit):
     if response.status_code == 200:
         data = response.json()
 
-        for i, post in enumerate(data['data']['children']):
+        for post in data['data']['children'][:10]:
             print(post['data']['title'])
-            if i == 9:
-                break
 
     elif response.status_code == 302:
         print('None')
