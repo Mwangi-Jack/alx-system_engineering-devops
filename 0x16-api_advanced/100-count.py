@@ -1,3 +1,8 @@
+#!/usr/bin/python3
+"""A  recursive function that queries the Reddit
+API, parses the title of all hot articles, and
+prints a sorted count of given keywords
+"""
 import requests
 
 
@@ -38,7 +43,7 @@ def recurse(subreddit, word_list, hot_list=[], after=None):
 
 
 def count_words(subreddit, word_list):
-    """Counts the words fetche"""
+    """Counts the words fetched"""
     hot_articles = recurse(subreddit, word_list)
 
     if hot_articles is None:
