@@ -6,25 +6,21 @@ hot posts
 
 import requests
 
-
 def top_ten(subreddit):
-    """Qerying API to print title of posts"""
+    """Getting the first 10 post titlees"""
+    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
 
-    url = f'http://www.reddit.com/r/{subreddit}/hot.json'
-    headers = {"User-Agent": "MyApp/1.0"}
+    params = {'limit': 10}
 
-    response = requests.get(url, timeout=2,
-                            params={"limit": 10}, headers=headers)
-    print(response.status_code)
+    response = requests.get(url, headers={"User-Agent": "YourApp/1.0"},
+                            params=params, allow_redirects=False)
+
     if response.status_code == 200:
-        data = response.json()['data']
-        posts = data['children']
+        data = response.json()
 
-        for post in posts:
+        for post in data['data']['children']:
             print(post['data']['title'])
-
     elif response.status_code == 302:
-        print(None)
-
+        print(f"The subreddit '{subreddit}' is invalid or may have been removed.")
     else:
-        print(None)
+        print("Failed to retrieve data from Reddit:", response.status_code)
