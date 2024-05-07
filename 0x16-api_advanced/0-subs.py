@@ -3,6 +3,7 @@
 Qerying Reddit API to get information about
 a subreddit
 """
+
 import requests
 
 
