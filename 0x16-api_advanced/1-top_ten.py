@@ -23,6 +23,6 @@ def top_ten(subreddit):
         for post in data['data']['children']:
             print(post['data']['title'])
     elif response.status_code == 302:
-        print(None)
+        print('None')
     else:
-        print(None)
+        print('None')
