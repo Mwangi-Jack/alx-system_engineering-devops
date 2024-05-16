@@ -65,6 +65,11 @@ server {
 			proxy_pass http://unix:/home/ubuntu/AirBnB_clone_v2/airbnb_onepage.sock;
 	}
 
+	location /airbnb-dynamic/number_odd_or_even/ {
+		include proxy_params
+        proxy_pass http://127.0.0.1:5001;
+	}
+
 	# pass PHP scripts to FastCGI server
 	#
 	#location ~ \.php$ {
