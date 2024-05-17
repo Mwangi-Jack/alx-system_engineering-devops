@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to server airbnb_onepage
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/AirBnB_clone_v2
+Environment="PATH=/usr/bin:/bin:/usr/local/bin"
+ExecStart=/home/ubuntu/.local/bin/gunicorn --workers 4 --bind unix:airbnb_onepage.sock -m 007 web_flask.0-hello_route:app
+
+[Install]
+WantedBy=multi-user.target
