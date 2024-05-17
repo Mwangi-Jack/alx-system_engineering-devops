@@ -55,7 +55,8 @@ server {
 
     # Serve static files
     location /static/ {
-        alias /AirBnB_clone_v4/web_dynamic/static/;
+		alias /home/ubuntu/AirBnB_clone_v4/web_dynamic/static/;
+		try_files $uri $uri/ =404
     }
 
 	location /airbnb-onepage {
